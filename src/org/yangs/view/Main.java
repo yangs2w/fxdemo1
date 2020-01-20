@@ -36,11 +36,14 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
 
         // 设置窗口没有标题栏
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        primaryStage.setOpacity(0.8);
 
         // 两个操作按钮，一个进入，一个退出
         Button in = new Button("  IN  ");
         Button out = new Button("  OUT  ");
+        Button bu = new Button("打开");
+//        bu.setTranslateX(0);
 
         // 窗口背景图片
         ImageView iv = new ImageView("images/image.jpg");
@@ -48,7 +51,11 @@ public class Main extends Application {
         AnchorPane pane = new AnchorPane();
         AnchorPane.setLeftAnchor(in, 180.0);
         AnchorPane.setLeftAnchor(out, 300.0);
-        pane.getChildren().addAll(iv, in, out);
+        AnchorPane.setLeftAnchor(bu, 0.0);
+        AnchorPane.setTopAnchor(bu, 0.0);
+        pane.getChildren().addAll(iv, bu, in, out);
+
+
         // 准备虚化的节点NODE
         Node node = getView(primaryStage);
 
@@ -74,21 +81,28 @@ public class Main extends Application {
         /*
         为两个按钮创建点击事件
          */
-        in.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
+        in.setOnAction(event -> {
+            tt.setFromX(-200);
+            tt.setToX(0);
+            tt.play();
+        });
+        out.setOnAction(event ->{
+            tt.setFromX(0);
+            tt.setToX(-200);
+            tt.play();
+        });
+
+        bu.setOnAction(event -> {
+            if (bu.getTranslateX() == 1 || bu.getTranslateX() == 0) {
                 tt.setFromX(-200);
                 tt.setToX(0);
                 tt.play();
-
-            }
-        });
-        out.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
+                bu.setText("关闭");
+            }else if (200 == bu.getTranslateX()) {
                 tt.setFromX(0);
                 tt.setToX(-200);
                 tt.play();
+                bu.setText("打开");
             }
         });
 
@@ -104,6 +118,7 @@ public class Main extends Application {
                     // 从pane中截图像像素
                     pane.snapshot(new SnapshotParameters(), wi);
                     iv_blur.setImage(wi);
+                    bu.setTranslateX(w);
                 }
             }
         });
