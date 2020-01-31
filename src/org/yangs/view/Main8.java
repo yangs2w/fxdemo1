@@ -3,6 +3,8 @@ package org.yangs.view;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -72,7 +74,21 @@ public class Main8 extends Application {
 
         // 鼠标移入的提示
         account.setTooltip(new Tooltip("6~18个字符"));
+
+        account.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (newValue.length() > 18)
+                    account.setText(oldValue);
+            }
+        });
+
         password.setTooltip(new Tooltip("6~16个字符，不包括特殊字符"));
+
+        password.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() > 16)
+                password.setText(oldValue);
+        });
 
 
         Button login = new Button("Login");
