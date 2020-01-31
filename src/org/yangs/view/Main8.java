@@ -1,16 +1,11 @@
 package org.yangs.view;
 
-import javafx.animation.Interpolator;
-import javafx.animation.TranslateTransition;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.effect.Effect;
-import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -20,7 +15,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 
 public class Main8 extends Application {
@@ -75,13 +69,12 @@ public class Main8 extends Application {
         // 鼠标移入的提示
         account.setTooltip(new Tooltip("6~18个字符"));
 
-        account.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (newValue.length() > 18)
-                    account.setText(oldValue);
-            }
+        account.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() > 18)
+                account.setText(oldValue);
         });
+
+        focuseChangeBorder(account);
 
         password.setTooltip(new Tooltip("6~16个字符，不包括特殊字符"));
 
@@ -89,6 +82,8 @@ public class Main8 extends Application {
             if (newValue.length() > 16)
                 password.setText(oldValue);
         });
+
+        focuseChangeBorder(password);
 
 
         Button login = new Button("Login");
@@ -132,6 +127,17 @@ public class Main8 extends Application {
         primaryStage.setWidth(520);
         primaryStage.setHeight(300);
         primaryStage.show();
+    }
+
+    private void focuseChangeBorder(Control control) {
+        control.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                control.setBorder(new Border(new BorderStroke(Paint.valueOf("#EE2C2C"), BorderStrokeStyle.SOLID, null, new BorderWidths(0, 0, 1, 0))));
+            }else {
+                control.setBorder(new Border(new BorderStroke(Paint.valueOf("#20B2AA"), BorderStrokeStyle.SOLID, null, new BorderWidths(0, 0, 1, 0))));
+            }
+        });
+
     }
 
     private void showInformation() {
