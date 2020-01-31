@@ -6,10 +6,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.effect.Effect;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
@@ -73,6 +70,10 @@ public class Main8 extends Application {
             }
         });
 
+        // 鼠标移入的提示
+        account.setTooltip(new Tooltip("6~18个字符"));
+        password.setTooltip(new Tooltip("6~16个字符，不包括特殊字符"));
+
 
         Button login = new Button("Login");
         login.setPrefWidth(280);
@@ -81,6 +82,7 @@ public class Main8 extends Application {
         login.setLayoutY(180);
         login.setFont(Font.font("sans-serif", 14));
         login.setTextFill(Paint.valueOf("#20B2AA"));
+        login.setTooltip(new Tooltip("登录"));
 
         initLoginButton(login);
 
