@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="fxdemo1:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/fxdemo1_jar</output-path>
+    <root id="archive" name="fxdemo1.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/matainfo/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="fxdemo1" />
+    </root>
+  </artifact>
+</component>
