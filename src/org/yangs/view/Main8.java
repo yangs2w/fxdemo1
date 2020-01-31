@@ -3,7 +3,6 @@ package org.yangs.view;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -31,18 +30,30 @@ public class Main8 extends Application {
 
         Group group = new Group();
 
+        // LOGO IMAGE
+        ImageView logo = new ImageView();
+        logo.setFitWidth(280);
+        logo.setFitHeight(110);
+        Image image = new Image(getClass().getClassLoader().getResource("images/5676caed1ee5f6abcb77b3b9a309d90d.gif").toExternalForm());
+        logo.setImage(image);
+        logo.setLayoutX(122);
+        logo.setLayoutY(20);
+
+        group.getChildren().addAll(logo);
+
+
         ImageView accountIcon = new ImageView(new Image(getClass().getClassLoader().getResource("images/safe-admin.png").toExternalForm()));
         accountIcon.setLayoutX(122);
-        accountIcon.setLayoutY(52);
+        accountIcon.setLayoutY(152);
 
         ImageView passwordIcon = new ImageView(new Image(getClass().getClassLoader().getResource("images/password.png").toExternalForm()));
         passwordIcon.setLayoutX(122);
-        passwordIcon.setLayoutY(112);
+        passwordIcon.setLayoutY(212);
 
         account.setPrefWidth(280);
         account.setPrefHeight(40);
         account.setLayoutX(120);
-        account.setLayoutY(40);
+        account.setLayoutY(140);
         account.setPromptText("enter your account.");
         account.setBorder(new Border(new BorderStroke(Paint.valueOf("#20B2AA"), BorderStrokeStyle.SOLID, null, new BorderWidths(0, 0, 1, 0))));
         account.setBackground(new Background(new BackgroundFill(Paint.valueOf("#FFFFFF"), null, null)));
@@ -52,7 +63,7 @@ public class Main8 extends Application {
         password.setPrefWidth(280);
         password.setPrefHeight(40);
         password.setLayoutX(120);
-        password.setLayoutY(100);
+        password.setLayoutY(200);
         password.setPromptText("enter your password.");
         password.setBorder(new Border(new BorderStroke(Paint.valueOf("#20B2AA"), BorderStrokeStyle.SOLID, null, new BorderWidths(0, 0, 1, 0))));
         password.setBackground(new Background(new BackgroundFill(Paint.valueOf("#FFFFFF"), null, null)));
@@ -67,10 +78,10 @@ public class Main8 extends Application {
         });
 
         // 鼠标移入的提示
-        account.setTooltip(new Tooltip("6~18个字符"));
+        account.setTooltip(new Tooltip("6~25个字符"));
 
         account.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.length() > 18)
+            if (newValue.length() > 25)
                 account.setText(oldValue);
         });
 
@@ -90,10 +101,11 @@ public class Main8 extends Application {
         login.setPrefWidth(280);
         login.setPrefHeight(40);
         login.setLayoutX(120);
-        login.setLayoutY(180);
+        login.setLayoutY(280);
         login.setFont(Font.font("sans-serif", 14));
         login.setTextFill(Paint.valueOf("#20B2AA"));
         login.setTooltip(new Tooltip("登录"));
+
 
         initLoginButton(login);
 
@@ -122,10 +134,11 @@ public class Main8 extends Application {
 
         primaryStage.setResizable(false);
 
+        primaryStage.getIcons().addAll(new Image(getClass().getClassLoader().getResource("images/login-icon.png").toExternalForm()));
         primaryStage.setScene(scene);
-        primaryStage.setTitle("登录");
-        primaryStage.setWidth(520);
-        primaryStage.setHeight(300);
+        primaryStage.setTitle("LOGIN");
+        primaryStage.setWidth(520); // 520
+        primaryStage.setHeight(400); // 300
         primaryStage.show();
     }
 
@@ -154,7 +167,7 @@ public class Main8 extends Application {
     }
 
     private void initLoginButton(Button button) {
-        button.setBackground(new Background(new BackgroundFill(Paint.valueOf("#458B7400"), new CornerRadii(0), Insets.EMPTY)));
-        button.setBorder(new Border(new BorderStroke(Paint.valueOf("#20B2AA"), BorderStrokeStyle.SOLID, null, new BorderWidths(1))));
+        button.setBackground(new Background(new BackgroundFill(Paint.valueOf("#458B7400"), new CornerRadii(3), Insets.EMPTY)));
+        button.setBorder(new Border(new BorderStroke(Paint.valueOf("#20B2AA"), BorderStrokeStyle.SOLID, new CornerRadii(3), new BorderWidths(1))));
     }
 }
